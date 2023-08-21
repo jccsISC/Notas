@@ -2,6 +2,7 @@ package com.jccsisc.myroomdb.iu.crudprofessor;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,10 +26,11 @@ public class ProfessorActivity extends AppCompatActivity {
 
     private ActivityProfessorBinding binding;
     public static String PROFESSORS_LIST = "professorsList";
+    private ProfessorViewModel professorViewModel;
     private AppDB db;
     private ProfessorEntity professor = new ProfessorEntity();
     private final List<ProfessorModel> listProfessors = new ArrayList<>();
-    private DBbyTask dBbyTask;
+//    private DBbyTask dBbyTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,11 @@ public class ProfessorActivity extends AppCompatActivity {
         binding = ActivityProfessorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        db = AppDB.getAppDb(getApplicationContext());
-        dBbyTask = new DBbyTask();
+
+        professorViewModel = new ViewModelProvider(this).get(ProfessorViewModel.class);
+
+//        db = AppDB.getAppDb(getApplicationContext());
+//        dBbyTask = new DBbyTask();
 
         listeners();
         observers();
@@ -62,7 +67,9 @@ public class ProfessorActivity extends AppCompatActivity {
             professor.setName(name);
             professor.setEmail(email);
 
-            dBbyTask.insertProfessor(professor);
+            professorViewModel.insertProfessor(professor);
+
+//            dBbyTask.insertProfessor(professor);
         });
         binding.btnReadProfessors.setOnClickListener(v -> {
             Log.d("READ", "Obteniendo la lista de profesires");
@@ -89,9 +96,20 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
     private void observers() {
-        dBbyTask.readProfessors().observe(this, professors -> {
-            if (professors != null) {
-                for (ProfessorEntity prof : professors) {
+//        dBbyTask.readProfessors().observe(this, professors -> {
+//            if (professors != null) {
+//                for (ProfessorEntity prof : professors) {
+//                    Log.i("PROFESSORS", prof.getName());
+//                    listProfessors.add(transformprofessorEntityToModel(prof));
+//                }
+//            }
+//        });
+
+        professorViewModel.getAllProfessors().observe(this, professorEntities -> {
+            if (professorEntities != null) {
+                binding.edtName.setText("");
+                binding.edtEmail.setText("");
+                for (ProfessorEntity prof : professorEntities) {
                     Log.i("PROFESSORS", prof.getName());
                     listProfessors.add(transformprofessorEntityToModel(prof));
                 }
@@ -129,9 +147,10 @@ public class ProfessorActivity extends AppCompatActivity {
             });
         }
 
-                public void shutdown() {
+        public void shutdown() {
             executor.shutdown();
         }
+
         private void clearInputFields() {
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(() -> {
@@ -142,11 +161,11 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (dBbyTask != null) {
-            dBbyTask.shutdown();
-        }
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        if (dBbyTask != null) {
+//            dBbyTask.shutdown();
+//        }
+//    }
 }

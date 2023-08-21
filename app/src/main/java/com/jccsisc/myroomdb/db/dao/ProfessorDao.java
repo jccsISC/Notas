@@ -24,6 +24,9 @@ public interface ProfessorDao {
     @Query("SELECT * FROM tbl_professor")
     LiveData<List<ProfessorEntity>> findAllProfessorLiveData();
 
+
+
+
     @Query("SELECT * FROM tbl_professor WHERE name LIKE :name")
     ProfessorEntity findProfessorByName(String name);
 
