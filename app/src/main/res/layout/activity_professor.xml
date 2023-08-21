@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".iu.crudprofessor.ProfessorActivity">
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"/>
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"/>
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fillViewport="true">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+          <Button
+              android:id="@+id/btnSave"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Guardar"
+              android:layout_marginTop="40dp"
+              android:layout_marginHorizontal="20dp"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center"
+              android:padding="5dp"
+              android:layout_marginTop="20dp">
+              <Button
+                  android:id="@+id/btnReadProfessors"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="3dp"
+                  android:text="Leer"/>
+              <Button
+                  android:id="@+id/btnFindProfessorsByName"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="3dp"
+                  android:text="Buscar por nombre"/>
+              <Button
+                  android:id="@+id/btnFinProfessorsById"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Buscar por Id"/>
+          </LinearLayout>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center"
+              android:padding="5dp"
+              android:layout_marginTop="20dp">
+              <Button
+                  android:id="@+id/btnUpdateProfessorsById"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="3dp"
+                  android:text="Actualizar"/>
+              <Button
+                  android:id="@+id/btnDeleteAll"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="3dp"
+                  android:text="Borrar todo"/>
+              <Button
+                  android:id="@+id/btnDeleteProfessorById"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Borrar por Id"/>
+          </LinearLayout>
+      </LinearLayout>
+   </ScrollView>
+
+</LinearLayout>
