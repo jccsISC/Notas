@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.jccsisc.myroomdb.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
                     if (listExtras != null && !listExtras.isEmpty()) {
                         Log.i("lista", listExtras.get(0).getName());
+                        StringBuilder name = new StringBuilder();
+                        for (ProfessorModel professorModel : listExtras) {
+                           name.append(professorModel.getName()).append("\n");
+                        }
+
+                        binding.tvProfessors.setText("Profesores:\n" +  name);
                     }
                 }
             }

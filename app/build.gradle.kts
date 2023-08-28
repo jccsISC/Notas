@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.jccsisc.myroomdb"
-        minSdk = 25
+        minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -44,6 +44,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //Room
-    implementation("androidx.room:room-runtime:2.4.3")
-    annotationProcessor("androidx.room:room-compiler:2.4.3")
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation ("androidx.room:room-rxjava3:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
+
+    //RXJava
+    implementation ("io.reactivex.rxjava3:rxjava:3.0.0")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
 }

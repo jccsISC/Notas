@@ -38,11 +38,7 @@ public class ProfessorActivity extends AppCompatActivity {
         binding = ActivityProfessorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         professorViewModel = new ViewModelProvider(this).get(ProfessorViewModel.class);
-
-//        db = AppDB.getAppDb(getApplicationContext());
-//        dBbyTask = new DBbyTask();
 
         listeners();
         observers();
@@ -69,7 +65,6 @@ public class ProfessorActivity extends AppCompatActivity {
 
             professorViewModel.insertProfessor(professor);
 
-//            dBbyTask.insertProfessor(professor);
         });
         binding.btnReadProfessors.setOnClickListener(v -> {
             Log.d("READ", "Obteniendo la lista de profesires");
@@ -96,15 +91,6 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
     private void observers() {
-//        dBbyTask.readProfessors().observe(this, professors -> {
-//            if (professors != null) {
-//                for (ProfessorEntity prof : professors) {
-//                    Log.i("PROFESSORS", prof.getName());
-//                    listProfessors.add(transformprofessorEntityToModel(prof));
-//                }
-//            }
-//        });
-
         professorViewModel.getAllProfessors().observe(this, professorEntities -> {
             if (professorEntities != null) {
                 binding.edtName.setText("");
@@ -124,48 +110,4 @@ public class ProfessorActivity extends AppCompatActivity {
                 prof.getEmail()
         );
     }
-
-    private class DBbyTask {
-        private final ExecutorService executor = Executors.newSingleThreadExecutor();
-
-        public void insertProfessor(final ProfessorEntity professor) {
-            executor.submit(() -> {
-                db.professorDao().insertProfessor(professor);
-                showToast("Guardado correctamente.");
-                clearInputFields();
-            });
-        }
-
-        public LiveData<List<ProfessorEntity>> readProfessors() {
-            return db.professorDao().findAllProfessorLiveData();
-        }
-
-        private void showToast(String message) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            handler.post(() -> {
-                Toast.makeText(ProfessorActivity.this, message, Toast.LENGTH_SHORT).show();
-            });
-        }
-
-        public void shutdown() {
-            executor.shutdown();
-        }
-
-        private void clearInputFields() {
-            Handler handler = new Handler(Looper.getMainLooper());
-            handler.post(() -> {
-                binding.edtName.setText("");
-                binding.edtEmail.setText("");
-            });
-        }
-    }
-
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (dBbyTask != null) {
-//            dBbyTask.shutdown();
-//        }
-//    }
 }
