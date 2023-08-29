@@ -27,10 +27,8 @@ public class ProfessorActivity extends AppCompatActivity {
     private ActivityProfessorBinding binding;
     public static String PROFESSORS_LIST = "professorsList";
     private ProfessorViewModel professorViewModel;
-    private AppDB db;
     private ProfessorEntity professor = new ProfessorEntity();
     private final List<ProfessorModel> listProfessors = new ArrayList<>();
-//    private DBbyTask dBbyTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +64,13 @@ public class ProfessorActivity extends AppCompatActivity {
             professorViewModel.insertProfessor(professor);
 
         });
-        binding.btnReadProfessors.setOnClickListener(v -> {
-            Log.d("READ", "Obteniendo la lista de profesires");
-            Intent resultIntent = new Intent();
-            resultIntent.putParcelableArrayListExtra(PROFESSORS_LIST, new ArrayList<>(listProfessors));
-            setResult(RESULT_OK, resultIntent);
-            finish();
-        });
+//        binding.btnReadProfessors.setOnClickListener(v -> {
+//            Log.d("READ", "Obteniendo la lista de profesires");
+//            Intent resultIntent = new Intent();
+//            resultIntent.putParcelableArrayListExtra(PROFESSORS_LIST, new ArrayList<>(listProfessors));
+//            setResult(RESULT_OK, resultIntent);
+//            finish();
+//        });
         binding.btnFindProfessorsByName.setOnClickListener(v -> {
 
         });
@@ -91,16 +89,16 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
     private void observers() {
-        professorViewModel.getAllProfessors().observe(this, professorEntities -> {
-            if (professorEntities != null) {
-                binding.edtName.setText("");
-                binding.edtEmail.setText("");
-                for (ProfessorEntity prof : professorEntities) {
-                    Log.i("PROFESSORS", prof.getName());
-                    listProfessors.add(transformprofessorEntityToModel(prof));
-                }
-            }
-        });
+//        professorViewModel.getAllProfessors().observe(this, professorEntities -> {
+//            if (professorEntities != null) {
+//                binding.edtName.setText("");
+//                binding.edtEmail.setText("");
+//                for (ProfessorEntity prof : professorEntities) {
+//                    Log.i("PROFESSORS", prof.getName());
+//                    listProfessors.add(transformprofessorEntityToModel(prof));
+//                }
+//            }
+//        });
     }
 
     private ProfessorModel transformprofessorEntityToModel(ProfessorEntity prof) {

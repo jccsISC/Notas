@@ -28,16 +28,15 @@ public class ProfessorViewModel extends AndroidViewModel {
 
     private final ProfessorRepositoryImpl repository;
     private CompositeDisposable disposables = new CompositeDisposable();
-    private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
+//    private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
 
     public ProfessorViewModel(@NonNull Application application) {
         super(application);
         repository = new ProfessorRepositoryImpl(application);
-        loadProfessors();
+//        loadProfessors();
     }
 
     public void insertProfessor(ProfessorEntity professorEntity) {
-//        repository.isertProfessor(professorEntity);
         Disposable disposable = repository.isertProfessor(professorEntity)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,22 +51,21 @@ public class ProfessorViewModel extends AndroidViewModel {
         disposables.add(disposable);
     }
 
-    public LiveData<List<ProfessorEntity>> getAllProfessors() {
-        return allProfessors;
-    }
+//    public LiveData<List<ProfessorEntity>> getAllProfessors() {
+//        return allProfessors;
+//    }
 
-    private void loadProfessors() {
-        Disposable disposable = repository.getAllProfessors()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(allProfessors::setValue);
-
-        disposables.add(disposable);
-    }
+//    private void loadProfessors() {
+//        Disposable disposable = repository.getAllProfessors()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(allProfessors::setValue);
+//
+//        disposables.add(disposable);
+//    }
 
     @Override
     protected void onCleared() {
-//        repository.close();
         super.onCleared();
         disposables.clear();
     }

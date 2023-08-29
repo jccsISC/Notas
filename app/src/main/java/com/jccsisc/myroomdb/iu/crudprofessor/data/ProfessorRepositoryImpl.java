@@ -21,7 +21,6 @@ import io.reactivex.rxjava3.core.Flowable;
 public class ProfessorRepositoryImpl implements ProfessorRepository {
 
     private final ProfessorDao professorDao;
-//    private final  ExecutorService dbWriteExecutor = Executors.newSingleThreadExecutor();
 
     public ProfessorRepositoryImpl(Context context) {
         AppDB db = AppDB.getInstance(context);
@@ -30,16 +29,12 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
 
     @Override
     public Completable isertProfessor(ProfessorEntity professorEntity) {
-//        dbWriteExecutor.submit(() -> professorDao.insertProfessor(professorEntity));
         return professorDao.insertProfessor(professorEntity);
     }
 
-    @Override
-    public Flowable<List<ProfessorEntity>> getAllProfessors() {
-        return professorDao.findAllProfessorFlowable();
-    }
-
-//    public void close() {
-//        dbWriteExecutor.shutdown();
+//    @Override
+//    public Flowable<List<ProfessorEntity>> getAllProfessors() {
+//        return professorDao.findAllProfessorFlowable();
 //    }
+
 }

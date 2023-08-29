@@ -15,5 +15,5 @@ import io.reactivex.rxjava3.core.Flowable;
 public interface ProfessorRepository {
     Completable isertProfessor(ProfessorEntity professorEntity);
 
-    Flowable<List<ProfessorEntity>> getAllProfessors();
+//    Flowable<List<ProfessorEntity>> getAllProfessors();
 }

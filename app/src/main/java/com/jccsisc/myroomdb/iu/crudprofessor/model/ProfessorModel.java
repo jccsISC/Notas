@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.Objects;
+
 /**
  * Project: MyRoomDB
  * FROM: com.jccsisc.myroomdb.iu.crudprofessor.model
@@ -76,5 +78,18 @@ public class ProfessorModel implements Parcelable {
         dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(email);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfessorModel that = (ProfessorModel) o;
+        return id == that.id && name.equals(that.name) && email.equals(that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email);
     }
 }
