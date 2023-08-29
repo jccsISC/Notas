@@ -58,8 +58,8 @@ public class ProfessorActivity extends AppCompatActivity {
                 return;
             }
 
-            professor.setName(name);
-            professor.setEmail(email);
+            professor.setName(name.toUpperCase(Locale.ROOT));
+            professor.setEmail(email.toUpperCase(Locale.ROOT));
 
             professorViewModel.insertProfessor(professor);
 

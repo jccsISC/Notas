@@ -27,6 +27,7 @@ public class MainViewModel extends AndroidViewModel {
     private final MainRepositoryImpl repository;
     private CompositeDisposable disposables = new CompositeDisposable();
     private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
+    private final MutableLiveData<List<ProfessorEntity>> getProfessors = new MutableLiveData<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -38,6 +39,11 @@ public class MainViewModel extends AndroidViewModel {
         return allProfessors;
     }
 
+
+    public LiveData<List<ProfessorEntity>> getProfessor() {
+        return getProfessors;
+    }
+
     private void loadProfessors() {
         Disposable disposable = repository.getAllProfessors()
                 .subscribeOn(Schedulers.io())
@@ -47,6 +53,14 @@ public class MainViewModel extends AndroidViewModel {
         disposables.add(disposable);
     }
 
+    public void searchProfessorByName(String name) {
+        Disposable disposable = repository.getProfessorsByName(name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getProfessors::setValue);
+
+        disposables.add(disposable);
+    }
 
     @Override
     protected void onCleared() {

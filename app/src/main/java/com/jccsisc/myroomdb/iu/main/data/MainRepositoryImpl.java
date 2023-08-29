@@ -28,4 +28,9 @@ public class MainRepositoryImpl implements MainRepository {
     public Flowable<List<ProfessorEntity>> getAllProfessors() {
         return professorDao.findAllProfessorFlowable();
     }
+
+    @Override
+    public Flowable<List<ProfessorEntity>> getProfessorsByName(String name) {
+        return professorDao.findProfessorsByName(name);
+    }
 }

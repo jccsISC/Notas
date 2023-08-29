@@ -3,9 +3,7 @@ package com.jccsisc.myroomdb.iu.main;
 import static com.jccsisc.myroomdb.iu.crudprofessor.ProfessorActivity.PROFESSORS_LIST;
 
 import android.content.Intent;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -21,6 +19,7 @@ import com.jccsisc.myroomdb.iu.main.adapter.MainAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -43,13 +42,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
 
-//                if (data != null) {
-//                    professorModelList = data.getParcelableArrayListExtra(PROFESSORS_LIST);
-//
-//                    if (professorModelList != null && !professorModelList.isEmpty()) {
-//                        initRvProfessor();
-//                    }
-//                }
+                if (data != null) {
+                    professorModelList = data.getParcelableArrayListExtra(PROFESSORS_LIST);
+
+                    if (professorModelList != null && !professorModelList.isEmpty()) {
+                        initRvProfessor();
+                    }
+                }
             }
         });
 
@@ -67,8 +66,22 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void observers() {
         mainViewModel.getAllProfessors().observe(this, professorEntities -> {
+            professorModelList.clear();
             if (professorEntities != null) {
 
+                if (professorEntities.size() > 0) {
+                    for (ProfessorEntity professorEntity : professorEntities) {
+                        professorModelList.add(transformprofessorEntityToModel(professorEntity));
+                    }
+
+                    initRvProfessor();
+                }
+            }
+        });
+
+        mainViewModel.getProfessor().observe(this,  professorEntities-> {
+            professorModelList.clear();
+            if (professorEntities != null) {
                 if (professorEntities.size() > 0) {
                     for (ProfessorEntity professorEntity : professorEntities) {
                         professorModelList.add(transformprofessorEntityToModel(professorEntity));
@@ -100,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        return false;
+        String query ="%" + newText.toUpperCase(Locale.ROOT) + "%";
+        mainViewModel.searchProfessorByName(query);
+        return true;
     }
 }

@@ -27,7 +27,7 @@ public interface ProfessorDao {
     Flowable<List<ProfessorEntity>> findAllProfessorFlowable();
 
     @Query("SELECT * FROM tbl_professor WHERE name LIKE :name")
-    ProfessorEntity findProfessorByName(String name);
+    Flowable<List<ProfessorEntity>> findProfessorsByName(String name);
 
     @Query("SELECT * FROM tbl_professor WHERE id = :id")
     ProfessorEntity findProfessorById(int id);

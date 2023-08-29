@@ -13,4 +13,5 @@ import io.reactivex.rxjava3.core.Flowable;
  */
 public interface MainRepository {
     Flowable<List<ProfessorEntity>> getAllProfessors();
+    Flowable<List<ProfessorEntity>> getProfessorsByName(String name);
 }
