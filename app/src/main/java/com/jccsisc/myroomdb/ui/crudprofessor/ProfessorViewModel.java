@@ -1,20 +1,15 @@
-package com.jccsisc.myroomdb.iu.crudprofessor;
+package com.jccsisc.myroomdb.ui.crudprofessor;
 
 import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
-import com.jccsisc.myroomdb.iu.crudprofessor.data.ProfessorRepositoryImpl;
-
-import java.util.List;
+import com.jccsisc.myroomdb.ui.crudprofessor.data.ProfessorRepositoryImpl;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;

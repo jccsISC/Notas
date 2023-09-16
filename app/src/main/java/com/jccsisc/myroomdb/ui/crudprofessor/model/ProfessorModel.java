@@ -1,4 +1,4 @@
-package com.jccsisc.myroomdb.iu.crudprofessor.model;
+package com.jccsisc.myroomdb.ui.crudprofessor.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

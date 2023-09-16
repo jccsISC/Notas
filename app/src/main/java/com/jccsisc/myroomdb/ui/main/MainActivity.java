@@ -1,6 +1,6 @@
-package com.jccsisc.myroomdb.iu.main;
+package com.jccsisc.myroomdb.ui.main;
 
-import static com.jccsisc.myroomdb.iu.crudprofessor.ProfessorActivity.PROFESSORS_LIST;
+import static com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity.PROFESSORS_LIST;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.jccsisc.myroomdb.databinding.ActivityMainBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
-import com.jccsisc.myroomdb.iu.crudprofessor.ProfessorActivity;
-import com.jccsisc.myroomdb.iu.crudprofessor.model.ProfessorModel;
-import com.jccsisc.myroomdb.iu.main.adapter.MainAdapter;
+import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity;
+import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
+import com.jccsisc.myroomdb.ui.main.adapter.MainAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

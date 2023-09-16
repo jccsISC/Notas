@@ -1,14 +1,19 @@
-package com.jccsisc.myroomdb.iu.crudprofessor;
+package com.jccsisc.myroomdb.ui.crudprofessor;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.jccsisc.myroomdb.R;
 import com.jccsisc.myroomdb.databinding.ActivityProfessorBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
-import com.jccsisc.myroomdb.iu.crudprofessor.model.ProfessorModel;
+import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,12 @@ public class ProfessorActivity extends AppCompatActivity {
         binding = ActivityProfessorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         professorViewModel = new ViewModelProvider(this).get(ProfessorViewModel.class);
 
         listeners();
@@ -35,28 +46,7 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
     private void listeners() {
-        binding.imbBack.setOnClickListener(v-> finish());
-        binding.btnSave.setOnClickListener(v -> {
 
-            String name = binding.edtName.getText().toString();
-            String email = binding.edtEmail.getText().toString().toLowerCase(Locale.ROOT);
-
-            if (name.isEmpty()) {
-                Toast.makeText(this, "Ingresa el nombre", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (email.isEmpty()) {
-                Toast.makeText(this, "Ingresa el correo", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            professor.setName(name.toUpperCase(Locale.ROOT));
-            professor.setEmail(email.toUpperCase(Locale.ROOT));
-
-            professorViewModel.insertProfessor(professor);
-
-        });
 //        binding.btnReadProfessors.setOnClickListener(v -> {
 //            Log.d("READ", "Obteniendo la lista de profesires");
 //            Intent resultIntent = new Intent();
@@ -64,20 +54,8 @@ public class ProfessorActivity extends AppCompatActivity {
 //            setResult(RESULT_OK, resultIntent);
 //            finish();
 //        });
-        binding.btnFindProfessorsByName.setOnClickListener(v -> {
-
-        });
-        binding.btnFinProfessorsById.setOnClickListener(v -> {
-
-        });
-        binding.btnUpdateProfessorsById.setOnClickListener(v -> {
-
-        });
-        binding.btnDeleteAll.setOnClickListener(v -> {
-
-        });
-        binding.btnDeleteProfessorById.setOnClickListener(v -> {
-
+        binding.cardImgProfessor.setOnClickListener(v -> {
+            Toast.makeText(this, "Aun no está esta funcionalidad", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -92,6 +70,49 @@ public class ProfessorActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu_professor, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_save) {
+            saveProfessor();
+            return true;
+        } else if (id == R.id.nav_delete) {
+
+            return true;
+        } else if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void saveProfessor() {
+        String name = binding.edtName.getText().toString();
+        String email = binding.edtEmail.getText().toString().toLowerCase(Locale.ROOT);
+
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Ingresa el nombre", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Ingresa el correo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        professor.setName(name.toUpperCase(Locale.ROOT));
+        professor.setEmail(email.toUpperCase(Locale.ROOT));
+
+        professorViewModel.insertProfessor(professor);
     }
 
     private ProfessorModel transformprofessorEntityToModel(ProfessorEntity prof) {

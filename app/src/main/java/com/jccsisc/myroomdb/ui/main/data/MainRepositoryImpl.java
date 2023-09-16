@@ -1,4 +1,4 @@
-package com.jccsisc.myroomdb.iu.main.data;
+package com.jccsisc.myroomdb.ui.main.data;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.jccsisc.myroomdb.iu.crudprofessor.data;
+package com.jccsisc.myroomdb.ui.crudprofessor.data;
 
 import android.content.Context;
 
@@ -6,12 +6,7 @@ import com.jccsisc.myroomdb.db.dao.ProfessorDao;
 import com.jccsisc.myroomdb.db.db.AppDB;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Flowable;
 
 /**
  * Project: MyRoomDB

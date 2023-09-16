@@ -1,7 +1,6 @@
-package com.jccsisc.myroomdb.iu.main.adapter;
+package com.jccsisc.myroomdb.ui.main.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,8 +9,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jccsisc.myroomdb.databinding.ItemProfessorBinding;
-import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
-import com.jccsisc.myroomdb.iu.crudprofessor.model.ProfessorModel;
+import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
 
 /**
  * Project: MyRoomDB

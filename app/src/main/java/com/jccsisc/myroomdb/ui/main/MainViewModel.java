@@ -1,4 +1,4 @@
-package com.jccsisc.myroomdb.iu.main;
+package com.jccsisc.myroomdb.ui.main;
 
 import android.app.Application;
 
@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
-import com.jccsisc.myroomdb.iu.main.data.MainRepositoryImpl;
+import com.jccsisc.myroomdb.ui.main.data.MainRepositoryImpl;
 
 import java.util.List;
 

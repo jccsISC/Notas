@@ -13,10 +13,10 @@
         android:theme="@style/Theme.MyRoomDB"
         tools:targetApi="31">
         <activity
-            android:name=".iu.crudprofessor.ProfessorActivity"
+            android:name=".ui.crudprofessor.ProfessorActivity"
             android:exported="false" />
         <activity
-            android:name=".iu.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
