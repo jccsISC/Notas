@@ -33,7 +33,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/primary_dark"
         android:layout_marginBottom="22dp"
+        app:tint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

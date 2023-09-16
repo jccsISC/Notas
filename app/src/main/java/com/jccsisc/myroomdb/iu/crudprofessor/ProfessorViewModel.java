@@ -27,7 +27,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class ProfessorViewModel extends AndroidViewModel {
 
     private final ProfessorRepositoryImpl repository;
-    private CompositeDisposable disposables = new CompositeDisposable();
+    private final CompositeDisposable disposables = new CompositeDisposable();
 //    private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
 
     public ProfessorViewModel(@NonNull Application application) {
@@ -43,6 +43,7 @@ public class ProfessorViewModel extends AndroidViewModel {
                 .subscribe(() -> {
                     //Success
                     Log.d("ok", "success");
+
                 }, throwable -> {
                    //handle error
                     Log.e("error", "error");

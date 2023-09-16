@@ -1,33 +1,25 @@
 package com.jccsisc.myroomdb.iu.crudprofessor;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.jccsisc.myroomdb.databinding.ActivityProfessorBinding;
-import com.jccsisc.myroomdb.db.db.AppDB;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 import com.jccsisc.myroomdb.iu.crudprofessor.model.ProfessorModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ProfessorActivity extends AppCompatActivity {
 
     private ActivityProfessorBinding binding;
     public static String PROFESSORS_LIST = "professorsList";
     private ProfessorViewModel professorViewModel;
-    private ProfessorEntity professor = new ProfessorEntity();
+    private final ProfessorEntity professor = new ProfessorEntity();
     private final List<ProfessorModel> listProfessors = new ArrayList<>();
 
     @Override
@@ -43,6 +35,7 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
     private void listeners() {
+        binding.imbBack.setOnClickListener(v-> finish());
         binding.btnSave.setOnClickListener(v -> {
 
             String name = binding.edtName.getText().toString();

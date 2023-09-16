@@ -7,6 +7,26 @@
     android:orientation="vertical"
     tools:context=".iu.crudprofessor.ProfessorActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_dark">
+        <ImageButton
+            android:id="@+id/imbBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/primary_dark"
+            app:tint="@color/white"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <EditText
         android:id="@+id/edtName"
         android:layout_width="match_parent"
@@ -37,6 +57,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="Guardar"
+              android:backgroundTint="@color/primary"
               android:layout_marginTop="40dp"
               android:layout_marginHorizontal="20dp"/>
 
@@ -52,17 +73,20 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginEnd="3dp"
+                  android:backgroundTint="@color/primary"
                   android:text="Leer"/>
               <Button
                   android:id="@+id/btnFindProfessorsByName"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginEnd="3dp"
+                  android:backgroundTint="@color/primary"
                   android:text="Buscar por nombre"/>
               <Button
                   android:id="@+id/btnFinProfessorsById"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:backgroundTint="@color/primary"
                   android:text="Buscar por Id"/>
           </LinearLayout>
 
@@ -78,17 +102,20 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginEnd="3dp"
+                  android:backgroundTint="@color/primary"
                   android:text="Actualizar"/>
               <Button
                   android:id="@+id/btnDeleteAll"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginEnd="3dp"
+                  android:backgroundTint="@color/primary"
                   android:text="Borrar todo"/>
               <Button
                   android:id="@+id/btnDeleteProfessorById"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:backgroundTint="@color/primary"
                   android:text="Borrar por Id"/>
           </LinearLayout>
       </LinearLayout>

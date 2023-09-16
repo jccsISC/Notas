@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class MainViewModel extends AndroidViewModel {
 
     private final MainRepositoryImpl repository;
-    private CompositeDisposable disposables = new CompositeDisposable();
+    private final CompositeDisposable disposables = new CompositeDisposable();
     private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
     private final MutableLiveData<List<ProfessorEntity>> getProfessors = new MutableLiveData<>();
 
