@@ -4,13 +4,19 @@ import static com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity.PROFESSORS
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.jccsisc.myroomdb.R;
 import com.jccsisc.myroomdb.databinding.ActivityMainBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity;
@@ -34,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Toolbar toolbar = binding.toolbar;
+        setSupportActionBar(toolbar);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         adapter = new MainAdapter();
@@ -116,5 +125,21 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         String query ="%" + newText.toUpperCase(Locale.ROOT) + "%";
         mainViewModel.searchProfessorByName(query);
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_delete_all) {
+            Toast.makeText(this, "Borrar todo", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -3,13 +3,14 @@
 
 
     <!--Main-->
-
+    <string name="txt_delete_all">Borrar todo</string>
 
     <!--Professor-->
     <string name="txt_save">Guardar</string>
     <string name="txt_delete">Borrar</string>
     <string name="hint_email">Correo</string>
     <string name="hint_name">Nombre</string>
+
 
 
 </resources>
