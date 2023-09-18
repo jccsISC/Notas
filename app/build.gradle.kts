@@ -52,6 +52,16 @@ dependencies {
     implementation ("io.reactivex.rxjava3:rxjava:3.0.0")
     implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
 
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
+
+    //Dagger
+    implementation("com.google.dagger:dagger:2.38.1")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.38.1")
+
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))//se agrega esta linea porque da problemas para generar dagger 2
+
     //Design
 
 }

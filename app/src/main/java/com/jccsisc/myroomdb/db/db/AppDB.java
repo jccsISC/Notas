@@ -16,18 +16,7 @@ import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
  * FROM: com.jccsisc.myroomdb.db.db
  * Created by Julio Cesar Camacho Silva on 07/08/23
  */
-@Database(entities = {ProfessorEntity.class}, version = 1)
+@Database(entities = {ProfessorEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDB extends RoomDatabase {
-    private static volatile AppDB INSTANCE_DB;
-
     public abstract ProfessorDao professorDao();
-
-    public static synchronized AppDB getInstance(Context context) {
-        if (INSTANCE_DB == null) {
-            INSTANCE_DB = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDB.class, DB_PROFESSOR)
-                    .build();
-        }
-        return INSTANCE_DB;
-    }
 }

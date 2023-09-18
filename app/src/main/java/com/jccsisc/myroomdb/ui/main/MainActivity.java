@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.jccsisc.myroomdb.MyApp;
 import com.jccsisc.myroomdb.R;
 import com.jccsisc.myroomdb.databinding.ActivityMainBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
@@ -27,10 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private ActivityMainBinding binding;
-    private MainViewModel mainViewModel;
+    @Inject
+    MainViewModel mainViewModel;
     private ActivityResultLauncher<Intent> professorLauncher;
     private List<ProfessorModel> professorModelList = new ArrayList<>();
     MainAdapter adapter;
@@ -44,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        // Inyección de dependencias para MainViewModel
+        ((MyApp) getApplication()).getAppComponent().inject(this);
+
         adapter = new MainAdapter();
 
         professorLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {

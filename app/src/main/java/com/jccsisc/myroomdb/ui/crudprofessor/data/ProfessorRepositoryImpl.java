@@ -1,10 +1,9 @@
 package com.jccsisc.myroomdb.ui.crudprofessor.data;
 
-import android.content.Context;
-
 import com.jccsisc.myroomdb.db.dao.ProfessorDao;
-import com.jccsisc.myroomdb.db.db.AppDB;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
+
+import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Completable;
 
@@ -17,9 +16,9 @@ public class ProfessorRepositoryImpl implements ProfessorRepository {
 
     private final ProfessorDao professorDao;
 
-    public ProfessorRepositoryImpl(Context context) {
-        AppDB db = AppDB.getInstance(context);
-        professorDao = db.professorDao();
+    @Inject
+    public ProfessorRepositoryImpl(ProfessorDao professorDao) {
+        this.professorDao = professorDao;
     }
 
     @Override

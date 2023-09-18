@@ -1,12 +1,11 @@
 package com.jccsisc.myroomdb.ui.main.data;
 
-import android.content.Context;
-
 import com.jccsisc.myroomdb.db.dao.ProfessorDao;
-import com.jccsisc.myroomdb.db.db.AppDB;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Flowable;
 
@@ -19,9 +18,9 @@ public class MainRepositoryImpl implements MainRepository {
 
     private final ProfessorDao professorDao;
 
-    public MainRepositoryImpl(Context context) {
-        AppDB db = AppDB.getInstance(context);
-        professorDao = db.professorDao();
+    @Inject
+    public MainRepositoryImpl(ProfessorDao professorDao) {
+        this.professorDao = professorDao;
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.jccsisc.myroomdb.ui.crudprofessor;
 
-import android.app.Application;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ViewModel;
 
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 import com.jccsisc.myroomdb.ui.crudprofessor.data.ProfessorRepositoryImpl;
+
+import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -19,16 +19,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * FROM: com.jccsisc.myroomdb.iu.crudprofessor
  * Created by Julio Cesar Camacho Silva on 21/08/23
  */
-public class ProfessorViewModel extends AndroidViewModel {
+public class ProfessorViewModel extends ViewModel {
 
     private final ProfessorRepositoryImpl repository;
     private final CompositeDisposable disposables = new CompositeDisposable();
-//    private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
 
-    public ProfessorViewModel(@NonNull Application application) {
-        super(application);
-        repository = new ProfessorRepositoryImpl(application);
-//        loadProfessors();
+    @Inject
+    public ProfessorViewModel(ProfessorRepositoryImpl professorRepository) {
+        repository = professorRepository;
     }
 
     public void insertProfessor(ProfessorEntity professorEntity) {
@@ -46,19 +44,6 @@ public class ProfessorViewModel extends AndroidViewModel {
 
         disposables.add(disposable);
     }
-
-//    public LiveData<List<ProfessorEntity>> getAllProfessors() {
-//        return allProfessors;
-//    }
-
-//    private void loadProfessors() {
-//        Disposable disposable = repository.getAllProfessors()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(allProfessors::setValue);
-//
-//        disposables.add(disposable);
-//    }
 
     @Override
     protected void onCleared() {

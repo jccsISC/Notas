@@ -8,8 +8,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.jccsisc.myroomdb.MyApp;
 import com.jccsisc.myroomdb.R;
 import com.jccsisc.myroomdb.databinding.ActivityProfessorBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
@@ -19,11 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 public class ProfessorActivity extends AppCompatActivity {
 
     private ActivityProfessorBinding binding;
     public static String PROFESSORS_LIST = "professorsList";
-    private ProfessorViewModel professorViewModel;
+
+    @Inject ProfessorViewModel professorViewModel;
+
+
     private final ProfessorEntity professor = new ProfessorEntity();
     private final List<ProfessorModel> listProfessors = new ArrayList<>();
 
@@ -38,8 +43,8 @@ public class ProfessorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-        professorViewModel = new ViewModelProvider(this).get(ProfessorViewModel.class);
+        // Inyección de dependencias para ProfessorViewModel
+        ((MyApp) getApplication()).getAppComponent().inject(this);
 
         listeners();
         observers();
