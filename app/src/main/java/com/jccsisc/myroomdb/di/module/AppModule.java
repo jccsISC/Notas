@@ -3,6 +3,7 @@ package com.jccsisc.myroomdb.di.module;
 import static com.jccsisc.myroomdb.constans.Constans.DB_PROFESSOR;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.room.Room;
 
@@ -12,6 +13,7 @@ import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorViewModel;
 import com.jccsisc.myroomdb.ui.crudprofessor.data.ProfessorRepositoryImpl;
 import com.jccsisc.myroomdb.ui.main.MainViewModel;
 import com.jccsisc.myroomdb.ui.main.data.MainRepositoryImpl;
+import com.jccsisc.myroomdb.utils.GlobalFunctions;
 
 import javax.inject.Singleton;
 
@@ -34,6 +36,14 @@ public class AppModule {
     @Provides
     @Singleton
     Application provideApplication() {
+        return application;
+    }
+
+    /**
+     *  Context
+     * */
+    @Provides
+    public Context provideApplicationContext() {
         return application;
     }
 

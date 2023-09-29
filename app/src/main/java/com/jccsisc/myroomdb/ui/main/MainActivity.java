@@ -22,6 +22,7 @@ import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity;
 import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
 import com.jccsisc.myroomdb.ui.main.adapter.MainAdapter;
+import com.jccsisc.myroomdb.utils.GlobalFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,21 +35,24 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ActivityMainBinding binding;
     @Inject
     MainViewModel mainViewModel;
+    @Inject
+    GlobalFunctions globalFunctions;
     private ActivityResultLauncher<Intent> professorLauncher;
     private List<ProfessorModel> professorModelList = new ArrayList<>();
     MainAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Inyección de dependencias para MainViewModel
+        ((MyApp) getApplication()).getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-
-        // Inyección de dependencias para MainViewModel
-        ((MyApp) getApplication()).getAppComponent().inject(this);
 
         adapter = new MainAdapter();
 
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private void listeners() {
         binding.searchProfessor.setOnQueryTextListener(this);
         binding.btnFab.setOnClickListener(v -> {
+//            globalFunctions.showToast("HOA CON DAGGER 2");
             Intent intent = new Intent(this, ProfessorActivity.class);
             professorLauncher.launch(intent);
         });
