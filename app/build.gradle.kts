@@ -63,5 +63,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))//se agrega esta linea porque da problemas para generar dagger 2
 
     //Design
-
+    // Circle Indicator (To fix the xml preview "Missing classes" error)
+    implementation("me.relex:circleindicator:2.1.6")
+    implementation("org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0")
 }
