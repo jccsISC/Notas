@@ -22,37 +22,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-        android:id="@+id/carousel"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        app:autoPlay="true"
-        app:carouselType="SHOWCASE"
-        android:background="@color/gray_100"
-        app:circularflow_angles="8"
-        app:carouselBackground="@color/secondary"
-        app:circularflow_defaultRadius="16dp"
-        app:barrierAllowsGoneWidgets="true"
-        app:imageScaleType="fitCenter"
-        app:infiniteCarousel="true"
-        app:showBottomShadow="false"
-        app:showCaption="false"
-        app:showNavigationButtons="false"
-        app:showTopShadow="false"
-        app:layout_constraintDimensionRatio="3:2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
-
-    <me.relex.circleindicator.CircleIndicator2
-        android:id="@+id/custom_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        app:ci_drawable="@drawable/ic_positive_blue_dot"
-        app:ci_drawable_unselected="@drawable/ic_negative_blue_dot"
-        app:layout_constraintTop_toBottomOf="@+id/carousel" />
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchProfessor"
         android:layout_width="0dp"
@@ -60,7 +29,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_indicator" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProfessors"
