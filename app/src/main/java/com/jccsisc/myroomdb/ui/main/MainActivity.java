@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private void listeners() {
         binding.searchProfessor.setOnQueryTextListener(this);
         binding.btnFab.setOnClickListener(v -> {
-//            globalFunctions.showToast("HOLA CON DAGGER 2");
             Intent intent = new Intent(this, ProfessorActivity.class);
             professorLauncher.launch(intent);
         });
@@ -114,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private void initRvProfessor() {
         binding.rvProfessors.setAdapter(adapter);
         adapter.submitList(professorModelList);
+        adapter.setOnItemClickListener(professorModel -> globalFunctions.showToast(professorModel.getName()));
     }
 
     private ProfessorModel transformprofessorEntityToModel(ProfessorEntity prof) {

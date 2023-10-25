@@ -18,6 +18,12 @@ import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
  */
 public class MainAdapter extends ListAdapter<ProfessorModel, MainAdapter.ViewHolderProfessors> {
 
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(ProfessorModel professorModel);
+    }
+
     public static final DiffUtil.ItemCallback<ProfessorModel> DIFF_CALBACK = new DiffUtil.ItemCallback<ProfessorModel>() {
         @Override
         public boolean areItemsTheSame(@NonNull ProfessorModel oldItem, @NonNull ProfessorModel newItem) {
@@ -47,6 +53,10 @@ public class MainAdapter extends ListAdapter<ProfessorModel, MainAdapter.ViewHol
         holder.bind(professorModel);
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     class ViewHolderProfessors extends RecyclerView.ViewHolder {
 
         ItemProfessorBinding binding;
@@ -59,6 +69,8 @@ public class MainAdapter extends ListAdapter<ProfessorModel, MainAdapter.ViewHol
         public void bind(ProfessorModel professorModel) {
             binding.tvProfessorName.setText(professorModel.getName());
             binding.tvProfessoEmail.setText(professorModel.getEmail());
+
+            binding.getRoot().setOnClickListener(v -> onItemClickListener.onItemClick(professorModel));
         }
     }
 }
