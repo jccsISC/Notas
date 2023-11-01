@@ -1,4 +1,4 @@
-package com.jccsisc.myroomdb.ui.main.data;
+package com.jccsisc.myroomdb.ui.home.data;
 
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 
@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Flowable;
  * FROM: com.jccsisc.myroomdb.iu.main.data
  * Created by Julio Cesar Camacho Silva on 28/08/23
  */
-public interface MainRepository {
+public interface HomeRepository {
     Flowable<List<ProfessorEntity>> getAllProfessors();
     Flowable<List<ProfessorEntity>> getProfessorsByName(String name);
 }

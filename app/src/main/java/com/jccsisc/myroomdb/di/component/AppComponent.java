@@ -2,7 +2,9 @@ package com.jccsisc.myroomdb.di.component;
 
 import com.jccsisc.myroomdb.di.module.AppModule;
 import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity;
-import com.jccsisc.myroomdb.ui.main.MainActivity;
+import com.jccsisc.myroomdb.ui.MainActivity;
+import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorFragment;
+import com.jccsisc.myroomdb.ui.home.HomeFragment;
 
 import javax.inject.Singleton;
 
@@ -17,6 +19,7 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 public interface AppComponent {
     void inject(MainActivity mainActivity);
-
     void inject(ProfessorActivity professorActivity);
+    void inject(HomeFragment homeFragment);
+    void inject(ProfessorFragment professorFragment);
 }

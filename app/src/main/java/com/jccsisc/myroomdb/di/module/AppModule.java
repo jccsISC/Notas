@@ -11,9 +11,8 @@ import com.jccsisc.myroomdb.db.dao.ProfessorDao;
 import com.jccsisc.myroomdb.db.db.AppDB;
 import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorViewModel;
 import com.jccsisc.myroomdb.ui.crudprofessor.data.ProfessorRepositoryImpl;
-import com.jccsisc.myroomdb.ui.main.MainViewModel;
-import com.jccsisc.myroomdb.ui.main.data.MainRepositoryImpl;
-import com.jccsisc.myroomdb.utils.GlobalFunctions;
+import com.jccsisc.myroomdb.ui.home.HomeViewModel;
+import com.jccsisc.myroomdb.ui.home.data.HomeRepositoryImpl;
 
 import javax.inject.Singleton;
 
@@ -83,14 +82,14 @@ public class AppModule {
      * */
     @Provides
     @Singleton
-    MainRepositoryImpl provideMainRepositoryImpl(ProfessorDao professorDao) {
-        return new MainRepositoryImpl(professorDao);
+    HomeRepositoryImpl provideMainRepositoryImpl(ProfessorDao professorDao) {
+        return new HomeRepositoryImpl(professorDao);
     }
 
     @Provides
     @Singleton
-    MainViewModel provideMainViewModel(MainRepositoryImpl repository) {
-        return new MainViewModel(repository);
+    HomeViewModel provideMainViewModel(HomeRepositoryImpl repository) {
+        return new HomeViewModel(repository);
     }
 
 }

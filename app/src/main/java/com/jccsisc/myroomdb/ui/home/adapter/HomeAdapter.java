@@ -1,4 +1,4 @@
-package com.jccsisc.myroomdb.ui.main.adapter;
+package com.jccsisc.myroomdb.ui.home.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,7 +16,7 @@ import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
  * FROM: com.jccsisc.myroomdb.iu.main.adapter
  * Created by Julio Cesar Camacho Silva on 28/08/23
  */
-public class MainAdapter extends ListAdapter<ProfessorModel, MainAdapter.ViewHolderProfessors> {
+public class HomeAdapter extends ListAdapter<ProfessorModel, HomeAdapter.ViewHolderProfessors> {
 
     private OnItemClickListener onItemClickListener;
 
@@ -36,7 +36,7 @@ public class MainAdapter extends ListAdapter<ProfessorModel, MainAdapter.ViewHol
         }
     };
 
-    public MainAdapter() {
+    public HomeAdapter() {
         super(DIFF_CALBACK);
     }
 

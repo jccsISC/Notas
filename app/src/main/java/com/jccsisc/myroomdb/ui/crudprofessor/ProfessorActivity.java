@@ -23,19 +23,10 @@ import javax.inject.Inject;
 
 public class ProfessorActivity extends AppCompatActivity {
 
-    private ActivityProfessorBinding binding;
-    public static String PROFESSORS_LIST = "professorsList";
-
-    @Inject ProfessorViewModel professorViewModel;
-
-
-    private final ProfessorEntity professor = new ProfessorEntity();
-    private final List<ProfessorModel> listProfessors = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityProfessorBinding.inflate(getLayoutInflater());
+        com.jccsisc.myroomdb.databinding.ActivityProfessorBinding binding = ActivityProfessorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Toolbar toolbar = binding.toolbar;
@@ -45,37 +36,9 @@ public class ProfessorActivity extends AppCompatActivity {
 
         // Inyección de dependencias para ProfessorViewModel
         ((MyApp) getApplication()).getAppComponent().inject(this);
-
-        listeners();
-        observers();
     }
 
-    private void listeners() {
 
-//        binding.btnReadProfessors.setOnClickListener(v -> {
-//            Log.d("READ", "Obteniendo la lista de profesires");
-//            Intent resultIntent = new Intent();
-//            resultIntent.putParcelableArrayListExtra(PROFESSORS_LIST, new ArrayList<>(listProfessors));
-//            setResult(RESULT_OK, resultIntent);
-//            finish();
-//        });
-        binding.cardImgProfessor.setOnClickListener(v -> {
-            Toast.makeText(this, "Aun no está esta funcionalidad", Toast.LENGTH_SHORT).show();
-        });
-    }
-
-    private void observers() {
-//        professorViewModel.getAllProfessors().observe(this, professorEntities -> {
-//            if (professorEntities != null) {
-//                binding.edtName.setText("");
-//                binding.edtEmail.setText("");
-//                for (ProfessorEntity prof : professorEntities) {
-//                    Log.i("PROFESSORS", prof.getName());
-//                    listProfessors.add(transformprofessorEntityToModel(prof));
-//                }
-//            }
-//        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,7 +50,7 @@ public class ProfessorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_save) {
-            saveProfessor();
+//            saveProfessor();
             return true;
         } else if (id == R.id.nav_delete) {
 
@@ -100,31 +63,5 @@ public class ProfessorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveProfessor() {
-        String name = binding.edtName.getText().toString();
-        String email = binding.edtEmail.getText().toString().toLowerCase(Locale.ROOT);
 
-        if (name.isEmpty()) {
-            Toast.makeText(this, "Ingresa el nombre", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (email.isEmpty()) {
-            Toast.makeText(this, "Ingresa el correo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        professor.setName(name.toUpperCase(Locale.ROOT));
-        professor.setEmail(email.toUpperCase(Locale.ROOT));
-
-        professorViewModel.insertProfessor(professor);
-    }
-
-    private ProfessorModel transformprofessorEntityToModel(ProfessorEntity prof) {
-        return new ProfessorModel(
-                prof.getId(),
-                prof.getName(),
-                prof.getEmail()
-        );
-    }
 }

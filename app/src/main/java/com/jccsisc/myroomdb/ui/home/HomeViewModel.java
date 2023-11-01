@@ -1,11 +1,11 @@
-package com.jccsisc.myroomdb.ui.main;
+package com.jccsisc.myroomdb.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
-import com.jccsisc.myroomdb.ui.main.data.MainRepositoryImpl;
+import com.jccsisc.myroomdb.ui.home.data.HomeRepositoryImpl;
 
 import java.util.List;
 
@@ -21,15 +21,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * FROM: com.jccsisc.myroomdb.iu
  * Created by Julio Cesar Camacho Silva on 28/08/23
  */
-public class MainViewModel extends ViewModel {
+public class HomeViewModel extends ViewModel {
 
-    private final MainRepositoryImpl repository;
+    private final HomeRepositoryImpl repository;
     private final CompositeDisposable disposables = new CompositeDisposable();
     private final MutableLiveData<List<ProfessorEntity>> allProfessors = new MutableLiveData<>();
     private final MutableLiveData<List<ProfessorEntity>> getProfessors = new MutableLiveData<>();
 
     @Inject
-    public MainViewModel(MainRepositoryImpl mainRepository) {
+    public HomeViewModel(HomeRepositoryImpl mainRepository) {
         this.repository = mainRepository;
         loadProfessors();
     }

@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.jccsisc.myroomdb"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.jccsisc.myroomdb"
         minSdk = 23
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -61,6 +61,10 @@ dependencies {
     annotationProcessor("com.google.dagger:dagger-compiler:2.38.1")
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))//se agrega esta linea porque da problemas para generar dagger 2
+
+    //NAVCOMPONENT
+    implementation("androidx.navigation:navigation-ui:2.7.4")
+    implementation("androidx.navigation:navigation-fragment:2.7.4")
 
     //Design
     // Circle Indicator (To fix the xml preview "Missing classes" error)

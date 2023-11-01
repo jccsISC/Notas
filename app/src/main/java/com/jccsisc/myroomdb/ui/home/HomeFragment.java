@@ -1,27 +1,30 @@
-package com.jccsisc.myroomdb.ui.main;
+package com.jccsisc.myroomdb.ui.home;
 
-import static com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity.PROFESSORS_LIST;
+import static android.app.Activity.RESULT_OK;
+import static com.jccsisc.myroomdb.ui.crudprofessor.ProfessorFragment.PROFESSORS_LIST;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.jccsisc.myroomdb.MyApp;
 import com.jccsisc.myroomdb.R;
-import com.jccsisc.myroomdb.databinding.ActivityMainBinding;
+import com.jccsisc.myroomdb.databinding.FragmentHomeBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 import com.jccsisc.myroomdb.ui.crudprofessor.ProfessorActivity;
 import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
-import com.jccsisc.myroomdb.ui.main.adapter.MainAdapter;
+import com.jccsisc.myroomdb.ui.home.adapter.HomeAdapter;
 import com.jccsisc.myroomdb.utils.GlobalFunctions;
 
 import java.util.ArrayList;
@@ -30,30 +33,39 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
 
-    private ActivityMainBinding binding;
+    private FragmentHomeBinding binding;
     @Inject
-    MainViewModel mainViewModel;
+    HomeViewModel mainViewModel;
     @Inject
     GlobalFunctions globalFunctions;
     private ActivityResultLauncher<Intent> professorLauncher;
     private List<ProfessorModel> professorModelList = new ArrayList<>();
-    MainAdapter adapter;
+    HomeAdapter adapter;
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // Inyección de dependencias para MainViewModel
-        ((MyApp) getApplication()).getAppComponent().inject(this);
-        super.onCreate(savedInstanceState);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ((MyApp) context.getApplicationContext()).getAppComponent().inject(this);
+    }
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
+    }
 
-        Toolbar toolbar = binding.toolbar;
-        setSupportActionBar(toolbar);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        adapter = new MainAdapter();
+        adapter = new HomeAdapter();
 
         professorLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
@@ -71,18 +83,20 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         listeners();
         observers();
+
     }
 
     private void listeners() {
         binding.searchProfessor.setOnQueryTextListener(this);
         binding.btnFab.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfessorActivity.class);
-            professorLauncher.launch(intent);
+//            Intent intent = new Intent(requireContext(), ProfessorActivity.class);
+//            professorLauncher.launch(intent);
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.action_homeFragment_to_professorFragment);
         });
     }
 
     private void observers() {
-        mainViewModel.getAllProfessors().observe(this, professorEntities -> {
+        mainViewModel.getAllProfessors().observe(getViewLifecycleOwner(), professorEntities -> {
             professorModelList.clear();
             if (professorEntities != null) {
 
@@ -96,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
-        mainViewModel.getProfessor().observe(this,  professorEntities-> {
+        mainViewModel.getProfessor().observe(getViewLifecycleOwner(),  professorEntities-> {
             professorModelList.clear();
             if (professorEntities != null) {
                 if (professorEntities.size() > 0) {
@@ -134,21 +148,5 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         String query ="%" + newText.toUpperCase(Locale.ROOT) + "%";
         mainViewModel.searchProfessorByName(query);
         return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_delete_all) {
-            Toast.makeText(this, "Borrar todo", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
