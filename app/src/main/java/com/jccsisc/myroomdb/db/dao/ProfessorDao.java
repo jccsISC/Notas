@@ -20,9 +20,17 @@ import io.reactivex.rxjava3.core.Flowable;
  */
 @Dao
 public interface ProfessorDao {
+    /**
+     * Completable: No necesitamos una respuesta en concreto solo saber si ya se ejecutó la acción
+     * Se usa usalmente para: INSERT, UPDATE, DELETE
+     * */
     @Insert
     Completable insertProfessor(ProfessorEntity professor);
 
+    /**
+     * Flowable: Necesitamos la respuesta en tiempo real, este se utilizar para los SELECT
+     * estar escuchando el cambio y el dato esperado.
+     * */
     @Query("SELECT * FROM tbl_professor")
     Flowable<List<ProfessorEntity>> findAllProfessorFlowable();
 

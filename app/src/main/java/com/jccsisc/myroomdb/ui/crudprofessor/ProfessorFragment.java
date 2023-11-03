@@ -2,17 +2,16 @@ package com.jccsisc.myroomdb.ui.crudprofessor;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.jccsisc.myroomdb.MyApp;
-import com.jccsisc.myroomdb.R;
 import com.jccsisc.myroomdb.databinding.FragmentProfessorBinding;
 import com.jccsisc.myroomdb.db.entity.ProfessorEntity;
 import com.jccsisc.myroomdb.ui.crudprofessor.model.ProfessorModel;
@@ -71,7 +70,7 @@ public class ProfessorFragment extends Fragment {
 //            finish();
 //        });
         binding.cardImgProfessor.setOnClickListener(v -> globalFunctions.showToast("Aun no está esta funcionalidad"));
-        binding.btnSave.setOnClickListener(v-> saveProfessor());
+        binding.btnSave.setOnClickListener(v -> saveProfessor());
     }
 
     private void observers() {
@@ -85,6 +84,22 @@ public class ProfessorFragment extends Fragment {
 //                }
 //            }
 //        });
+
+        professorViewModel.insertProfessor.observe(getViewLifecycleOwner(), result -> {
+            switch (result.status) {
+                case LOADING:
+                    Log.d("INSERT", "Cargando...");
+                    break;
+                case SUCCESS:
+                    globalFunctions.showToast("Se guardó correctamente");
+                    binding.edtName.setText("");
+                    binding.edtEmail.setText("");
+                    break;
+                case ERROR:
+                    globalFunctions.showToast("Ocurrió un error al intentar guardar, intenta de nuevo.");
+                    break;
+            }
+        });
     }
 
     private void saveProfessor() {
