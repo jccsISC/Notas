@@ -8,3 +8,4 @@ Pequeña aplicación desarrollada en java con buenas practicas
 - RXJava
 - Navigation Component
 - Single Activity
+- Dagger 2
